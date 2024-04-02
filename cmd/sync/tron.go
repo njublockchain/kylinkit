@@ -44,6 +44,7 @@ func (s *TronSyncMan) Preload(end uint64) {
 	remoteLatest := block.Number
 	log.Warn(remoteLatest)
 	safeLatest := uint64(*remoteLatest) / 1_000 * 1_000
+	// safeLatest := uint64(50_000_000)
 
 	for start := uint64(localLatest + 1); start < safeLatest; start++ {
 		height := new(big.Int).SetUint64(start)
@@ -76,7 +77,6 @@ func (s *TronSyncMan) Preload(end uint64) {
 					_, err = txInfoColl.BulkWrite(ctx, txInfoModels)
 					chk(err)
 				}
-
 			}
 		}
 
